@@ -1,5 +1,6 @@
 import getSite from "@/lib/api";
 import Image from "next/image";
+import { notFound } from "next/navigation";
 
 export default async function Home({
     params,
@@ -8,6 +9,9 @@ export default async function Home({
 }) {
     const { domain } = await params;
     const res = await getSite(domain);
+    if (!res || res.error) {
+        return notFound();
+    }
     console.log(res);
     return (
         <div className="flex min-h-screen items-center justify-center bg-zinc-50 font-sans dark:bg-black">

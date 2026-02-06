@@ -178,7 +178,7 @@
 }
 
 .bubblegum {
-    --background: oklch(9.635% 0.01447 337.524);
+    --background: oklch(0.9399 0.0203 345.6985);
     --foreground: oklch(0.4712 0 0);
     --card: oklch(0.9498 0.05 86.8891);
     --card-foreground: oklch(0.4712 0 0);
