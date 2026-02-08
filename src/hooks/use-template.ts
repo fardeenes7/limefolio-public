@@ -41,7 +41,7 @@ function getComponentWithFallback(
 
     // If theme exists and has the component, use it
     if (themeTemplate && themeTemplate[componentKey]) {
-        return themeTemplate[componentKey];
+        return themeTemplate[componentKey] as ComponentType<PageProps>;
     }
 
     // Otherwise, fall back to default theme component
@@ -50,7 +50,7 @@ function getComponentWithFallback(
             `Component "${componentKey}" not found in theme "${theme}". ` +
                 `Falling back to default theme.`,
         );
-        return defaultTemplate[componentKey];
+        return defaultTemplate[componentKey] as ComponentType<PageProps>;
     }
 
     // This should never happen if default theme is properly configured
@@ -74,9 +74,10 @@ function buildTemplateWithFallbacks(theme: string): ThemeTemplate {
 
     // Build template with fallbacks for each component
     const template: ThemeTemplate = {
+        name: themeTemplate.name,
+        slug: themeTemplate.slug,
         home: getComponentWithFallback(theme, "home"),
         "single-project": getComponentWithFallback(theme, "single-project"),
-        // Add more page types here as needed
     };
 
     return template;

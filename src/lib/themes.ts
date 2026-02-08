@@ -1,7 +1,10 @@
-export const themes = [
-    { name: "Default", value: "default" },
-    { name: "Default Dark", value: "dark" },
-    { name: "Amethyst Haze", value: "amethyst-haze" },
-    { name: "Bubblegum", value: "bubblegum" },
-    { name: "Bubblegum Dark", value: "bubblegum-dark" },
-];
+/**
+ * Legacy themes export for backward compatibility
+ * Now uses the ColorThemes registry
+ */
+import { getColorThemeMetadata } from "./color-themes";
+
+export const themes = getColorThemeMetadata().map((theme) => ({
+    name: theme.name,
+    value: theme.slug,
+}));

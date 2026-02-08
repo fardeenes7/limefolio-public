@@ -5,6 +5,10 @@ import { ThemeProvider } from "next-themes";
 import { themes } from "@/lib/themes";
 import { TemplateProvider } from "@/contexts/template-context";
 import { getFont, getAllFontVariables } from "@/lib/fonts";
+import {
+    getColorTheme,
+    themeVariablesToCSSProperties,
+} from "@/lib/color-themes";
 
 export const metadata: Metadata = {
     title: "Create Next App",
@@ -23,11 +27,11 @@ export default async function DomainLayout({
     console.log("Site data:", siteData);
 
     // Get configuration from API or use defaults
-    const theme = siteData?.theme || "light";
+    const colorThemeSlug = siteData?.theme || "default";
     const template = siteData?.template || "minimal";
     const fontSlug = siteData?.font || "outfit";
 
-    console.log("Using theme:", theme);
+    console.log("Using color theme:", colorThemeSlug);
     console.log("Using template:", template);
     console.log("Using font:", fontSlug);
 
@@ -39,8 +43,16 @@ export default async function DomainLayout({
     const selectedFont = getFont(fontSlug);
     const allFontVariables = getAllFontVariables();
 
+    // Get the selected color theme and convert to CSS properties
+    const colorTheme = getColorTheme(colorThemeSlug);
+    const themeStyles = themeVariablesToCSSProperties(colorTheme.variables);
+
     return (
-        <html lang="en" className={allFontVariables}>
+        <html
+            lang="en"
+            className={allFontVariables}
+            style={themeStyles as React.CSSProperties}
+        >
             <body
                 className={`antialiased font-${fontSlug}`}
                 style={{
@@ -49,7 +61,7 @@ export default async function DomainLayout({
             >
                 <ThemeProvider
                     attribute="class"
-                    defaultTheme={theme}
+                    defaultTheme={colorThemeSlug}
                     enableSystem
                     disableTransitionOnChange
                     themes={themes?.map((theme) => theme.value)}
