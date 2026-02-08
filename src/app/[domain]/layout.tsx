@@ -1,22 +1,10 @@
 import getSite from "@/lib/api";
 import { notFound } from "next/navigation";
-import { Geist, Geist_Mono, Figtree } from "next/font/google";
 import { Metadata } from "next";
 import { ThemeProvider } from "next-themes";
 import { themes } from "@/lib/themes";
 import { TemplateProvider } from "@/contexts/template-context";
-
-const figtree = Figtree({ subsets: ["latin"], variable: "--font-sans" });
-
-const geistSans = Geist({
-    variable: "--font-geist-sans",
-    subsets: ["latin"],
-});
-
-const geistMono = Geist_Mono({
-    variable: "--font-geist-mono",
-    subsets: ["latin"],
-});
+import { getFont, getAllFontVariables } from "@/lib/fonts";
 
 export const metadata: Metadata = {
     title: "Create Next App",
@@ -34,19 +22,30 @@ export default async function DomainLayout({
     const siteData = await getSite(domain);
     console.log("Site data:", siteData);
 
-    // Get theme from API or use default
+    // Get configuration from API or use defaults
     const theme = siteData?.theme || "light";
     const template = siteData?.template || "minimal";
+    const fontSlug = siteData?.font || "figtree";
+
     console.log("Using theme:", theme);
+    console.log("Using template:", template);
+    console.log("Using font:", fontSlug);
 
     if (!siteData || siteData.error) {
         return notFound();
     }
 
+    // Get the selected font configuration
+    const selectedFont = getFont(fontSlug);
+    const allFontVariables = getAllFontVariables();
+
     return (
-        <html lang="en" className={`${figtree.variable}`}>
+        <html lang="en" className={allFontVariables}>
             <body
-                className={`${geistSans.variable} ${geistMono.variable} antialiased`}
+                className={`antialiased font-${fontSlug}`}
+                style={{
+                    fontFamily: `var(${selectedFont.variable})`,
+                }}
             >
                 <ThemeProvider
                     attribute="class"
