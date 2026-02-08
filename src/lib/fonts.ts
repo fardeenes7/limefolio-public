@@ -1,4 +1,11 @@
-import { Figtree, Geist, Geist_Mono } from "next/font/google";
+import {
+    Figtree,
+    Geist,
+    Geist_Mono,
+    Inter,
+    JetBrains_Mono,
+    Outfit,
+} from "next/font/google";
 
 /**
  * Font configuration interface
@@ -14,6 +21,12 @@ export interface FontConfig {
  * Font Registry
  * Configure all available fonts here
  */
+
+//Inter
+const inter = Inter({
+    subsets: ["latin"],
+    variable: "--font-inter",
+});
 
 // Figtree font
 const figtree = Figtree({
@@ -33,11 +46,29 @@ const geistMono = Geist_Mono({
     subsets: ["latin"],
 });
 
+//Outfit font
+const outfit = Outfit({
+    subsets: ["latin"],
+    variable: "--font-outfit",
+});
+
+//jetbrain mono
+const jetbrainsMono = JetBrains_Mono({
+    subsets: ["latin"],
+    variable: "--font-jetbrains-mono",
+});
+
 /**
  * Fonts Registry
  * Maps font slugs to their configurations
  */
 export const Fonts: Record<string, FontConfig> = {
+    inter: {
+        name: "Inter",
+        slug: "inter",
+        variable: "--font-inter",
+        font: inter,
+    },
     figtree: {
         name: "Figtree",
         slug: "figtree",
@@ -56,6 +87,18 @@ export const Fonts: Record<string, FontConfig> = {
         variable: "--font-geist-mono",
         font: geistMono,
     },
+    outfit: {
+        name: "Outfit",
+        slug: "outfit",
+        variable: "--font-outfit",
+        font: outfit,
+    },
+    "jetbrains-mono": {
+        name: "JetBrains Mono",
+        slug: "jetbrains-mono",
+        variable: "--font-jetbrains-mono",
+        font: jetbrainsMono,
+    },
 };
 
 /**
@@ -66,10 +109,10 @@ export function getFont(fontSlug: string | undefined | null): FontConfig {
     if (!fontSlug || !Fonts[fontSlug]) {
         if (fontSlug && !Fonts[fontSlug]) {
             console.warn(
-                `Font "${fontSlug}" not found. Falling back to figtree.`,
+                `Font "${fontSlug}" not found. Falling back to inter.`,
             );
         }
-        return Fonts.figtree;
+        return Fonts.inter;
     }
     return Fonts[fontSlug];
 }
