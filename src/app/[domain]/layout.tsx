@@ -4,6 +4,7 @@ import { Geist, Geist_Mono, Figtree } from "next/font/google";
 import { Metadata } from "next";
 import { ThemeProvider } from "next-themes";
 import { themes } from "@/lib/themes";
+import { TemplateProvider } from "@/contexts/template-context";
 
 const figtree = Figtree({ subsets: ["latin"], variable: "--font-sans" });
 
@@ -30,9 +31,14 @@ export default async function DomainLayout({
     params: Promise<{ domain: string }>;
 }>) {
     const { domain } = await params;
-    const res = await getSite(domain);
-    console.log(res);
-    // if (!res || res.error) {
+    const siteData = await getSite(domain);
+    console.log("Site data:", siteData);
+
+    // Get theme from API or use default
+    const theme = siteData?.theme || "default";
+    console.log("Using theme:", theme);
+
+    // if (!siteData || siteData.error) {
     //     return notFound();
     // }
 
@@ -48,7 +54,9 @@ export default async function DomainLayout({
                     disableTransitionOnChange
                     themes={themes?.map((theme) => theme.value)}
                 >
-                    {children}
+                    <TemplateProvider theme={"theme"}>
+                        {children}
+                    </TemplateProvider>
                 </ThemeProvider>
             </body>
         </html>
