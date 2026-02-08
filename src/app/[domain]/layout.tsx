@@ -35,12 +35,13 @@ export default async function DomainLayout({
     console.log("Site data:", siteData);
 
     // Get theme from API or use default
-    const theme = siteData?.theme || "default";
+    const theme = siteData?.theme || "light";
+    const template = siteData?.template || "minimal";
     console.log("Using theme:", theme);
 
-    // if (!siteData || siteData.error) {
-    //     return notFound();
-    // }
+    if (!siteData || siteData.error) {
+        return notFound();
+    }
 
     return (
         <html lang="en" className={`${figtree.variable}`}>
@@ -49,12 +50,12 @@ export default async function DomainLayout({
             >
                 <ThemeProvider
                     attribute="class"
-                    defaultTheme="default"
+                    defaultTheme={theme}
                     enableSystem
                     disableTransitionOnChange
                     themes={themes?.map((theme) => theme.value)}
                 >
-                    <TemplateProvider theme={"theme"}>
+                    <TemplateProvider theme={template}>
                         {children}
                     </TemplateProvider>
                 </ThemeProvider>

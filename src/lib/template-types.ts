@@ -15,10 +15,23 @@ export interface PageProps {
 }
 
 /**
+ * Template metadata
+ * Provides information about a template
+ */
+export interface TemplateMetadata {
+    name: string;
+    slug: string;
+    description?: string;
+}
+
+/**
  * Template definition for a theme
  * Each theme must provide components for all these pages
  */
 export interface ThemeTemplate {
+    name: string;
+    slug: string;
+    description?: string;
     home: ComponentType<PageProps>;
     "single-project": ComponentType<PageProps>;
     // Add more page types as needed:

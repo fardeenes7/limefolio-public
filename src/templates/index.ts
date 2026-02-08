@@ -18,6 +18,7 @@
 import { TemplateRegistry } from "@/lib/template-types";
 import { defaultTemplate } from "./default";
 import { modernTemplate } from "./modern";
+import { minimalTemplate } from "./minimal";
 
 // Import additional themes here:
 // import { minimalTemplate } from "./minimal";
@@ -29,8 +30,7 @@ import { modernTemplate } from "./modern";
 export const Templates: TemplateRegistry = {
     default: defaultTemplate,
     modern: modernTemplate,
-    // Add more themes here:
-    // minimal: minimalTemplate,
+    minimal: minimalTemplate,
 };
 
 /**
@@ -61,4 +61,15 @@ export function templateExists(themeId: string): boolean {
  */
 export function getAvailableThemes(): string[] {
     return Object.keys(Templates);
+}
+
+/**
+ * Get metadata for all available templates
+ */
+export function getTemplateMetadata() {
+    return Object.entries(Templates).map(([slug, template]) => ({
+        name: template.name,
+        slug: template.slug,
+        description: template.description,
+    }));
 }
