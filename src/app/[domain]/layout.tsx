@@ -28,7 +28,7 @@ export default async function DomainLayout({
 
     // Get configuration from API or use defaults
     const colorThemeSlug = siteData?.theme || "default";
-    const template = siteData?.template || "minimal";
+    const template = siteData?.template || "default";
     const fontSlug = siteData?.font || "outfit";
 
     console.log("Using color theme:", colorThemeSlug);
