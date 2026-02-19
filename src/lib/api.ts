@@ -18,6 +18,10 @@ export default async function getSite(domain: string) {
         headers: {
             "x-public-domain": domain,
         },
+        next: {
+            revalidate: 3600,
+            tags: [`${domain}-site`],
+        },
     });
     return res;
 }

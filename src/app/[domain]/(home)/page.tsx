@@ -1,6 +1,6 @@
 import getSite from "@/lib/api";
 import { notFound } from "next/navigation";
-import HomeClient from "@/app/[domain]/(home)/home-client";
+import { getTemplate } from "@/templates";
 
 export default async function Home({
     params,
@@ -14,6 +14,10 @@ export default async function Home({
         return notFound();
     }
 
-    // Pass data to client component which uses useTemplate hook
-    return <HomeClient data={siteData} />;
+    // Resolve the correct template entirely on the server.
+    // getTemplate() falls back to "default" if the theme is unknown.
+    const template = getTemplate(siteData.template);
+    // const HomeComponent = template.home;
+
+    return <template.home data={siteData} />;
 }

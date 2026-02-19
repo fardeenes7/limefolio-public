@@ -22,6 +22,7 @@ export interface TemplateMetadata {
     name: string;
     slug: string;
     description?: string;
+    tags?: string[];
 }
 
 /**
@@ -32,6 +33,7 @@ export interface ThemeTemplate {
     name: string;
     slug: string;
     description?: string;
+    tags?: string[];
     home: ComponentType<PageProps>;
     "single-project": ComponentType<PageProps>;
     // Add more page types as needed:

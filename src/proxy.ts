@@ -5,6 +5,12 @@ export async function proxy(request: NextRequest) {
     //gget the host (subdommain or domain)
     const host = request.headers.get("host");
 
+    if (host?.startsWith("preview")) {
+        return NextResponse.rewrite(
+            new URL(`/preview${request.nextUrl.pathname}`, request.url),
+        );
+    }
+
     if (host?.endsWith("localhost:3001")) {
         return NextResponse.rewrite(
             new URL(

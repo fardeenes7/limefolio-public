@@ -11,7 +11,9 @@ import MinimalSingleProject from "./single-project";
 export const minimalTemplate: ThemeTemplate = {
     name: "Minimal",
     slug: "minimal",
-    description: "Clean and professional default template",
+    description:
+        "Typography-first layout with ample whitespace and a refined reading experience.",
+    tags: ["Minimal", "Typography", "Content-first"],
     home: MinimalHome,
     "single-project": MinimalSingleProject,
 };

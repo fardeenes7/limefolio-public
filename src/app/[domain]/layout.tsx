@@ -3,7 +3,7 @@ import { notFound } from "next/navigation";
 import { Metadata } from "next";
 import { ThemeProvider } from "next-themes";
 import { themes } from "@/lib/themes";
-import { TemplateProvider } from "@/contexts/template-context";
+// TemplateProvider removed — template resolution is now done server-side per page.
 import { getFont, getAllFontVariables } from "@/lib/fonts";
 import {
     getColorTheme,
@@ -66,9 +66,7 @@ export default async function DomainLayout({
                     disableTransitionOnChange
                     themes={themes?.map((theme) => theme.value)}
                 >
-                    <TemplateProvider theme={template}>
-                        {children}
-                    </TemplateProvider>
+                    {children}
                 </ThemeProvider>
             </body>
         </html>

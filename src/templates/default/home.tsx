@@ -47,10 +47,10 @@ export default function DefaultHome({ data }: PageProps) {
                 <div className="absolute inset-0 bg-grid-pattern opacity-5" />
                 <div className="container mx-auto px-6 py-20 sm:py-64 relative">
                     <div className="max-w-4xl mx-auto text-center">
-                        <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-primary/10 text-primary text-sm font-medium mb-6">
+                        {/* <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-primary/10 text-primary text-sm font-medium mb-6">
                             <IconRocket size={16} />
                             <span>Available for opportunities</span>
-                        </div>
+                        </div> */}
 
                         <h1 className="text-5xl sm:text-6xl lg:text-7xl font-bold tracking-tight text-foreground mb-6">
                             {data?.title || "Welcome to My Portfolio"}

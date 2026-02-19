@@ -11,7 +11,9 @@ import ModernSingleProject from "./single-project";
 export const modernTemplate: ThemeTemplate = {
     name: "Modern",
     slug: "modern",
-    description: "Modern and dynamic template with contemporary design",
+    description:
+        "Bold, vibrant design with a full-bleed gradient hero and strong typography.",
+    tags: ["Bold", "Vibrant", "Gradient hero"],
     home: ModernHome,
     "single-project": ModernSingleProject,
 };
