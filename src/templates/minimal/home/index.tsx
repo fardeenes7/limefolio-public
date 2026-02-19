@@ -154,9 +154,9 @@ export default function MinimalHome({ data }: PageProps) {
                                                     target="_blank"
                                                     rel="noopener noreferrer"
                                                     className="text-muted-foreground hover:text-foreground transition-colors flex items-center gap-1"
-                                                    onClick={(e) =>
-                                                        e.stopPropagation()
-                                                    }
+                                                    // onClick={(e) =>
+                                                    //     e.stopPropagation()
+                                                    // }
                                                 >
                                                     <IconBrandGithub
                                                         size={16}

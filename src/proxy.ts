@@ -6,8 +6,13 @@ export async function proxy(request: NextRequest) {
     const host = request.headers.get("host");
 
     if (host?.startsWith("preview")) {
+        // Route through [domain] routing using the reserved "preview" domain slug.
+        // ?template=<slug> on the request URL is forwarded automatically.
         return NextResponse.rewrite(
-            new URL(`/preview${request.nextUrl.pathname}`, request.url),
+            new URL(
+                `/preview${request.nextUrl.pathname}${request.nextUrl.search}`,
+                request.url,
+            ),
         );
     }
 
