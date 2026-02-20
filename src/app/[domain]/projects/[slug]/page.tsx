@@ -43,6 +43,8 @@ export default async function SingleProjectPage({
         getProject(domain, slug),
     ]);
 
+    console.log(project);
+
     if (!siteData || siteData.error) return notFound();
     if (!project || project.error) return notFound();
 

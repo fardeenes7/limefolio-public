@@ -1,4 +1,5 @@
 import { PageProps } from "@/lib/template-types";
+import { MediaGallery } from "@/components/ui/media-gallery";
 
 /**
  * Default Theme - Single Project Page Component
@@ -17,6 +18,12 @@ export default function MinimalSingleProject({ data }: PageProps) {
                         {data?.project?.description ||
                             "This is the default single project template."}
                     </p>
+                    {/* Project Media */}
+                    {data?.project?.media && data.project.media.length > 0 && (
+                        <div className="w-full mt-8 mb-12">
+                            <MediaGallery media={data.project.media} />
+                        </div>
+                    )}
                     <div className="bg-muted p-6 rounded-lg border border-border">
                         <pre className="text-sm text-foreground overflow-auto">
                             {JSON.stringify(data, null, 2)}

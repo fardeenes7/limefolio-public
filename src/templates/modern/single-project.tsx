@@ -8,6 +8,7 @@ import {
     IconCalendar,
     IconSparkles,
 } from "@tabler/icons-react";
+import { MediaGallery } from "@/components/ui/media-gallery";
 
 /**
  * Modern Template — Single Project Page
@@ -161,16 +162,9 @@ export default function ModernSingleProject({ data }: PageProps) {
                             </div>
                         )}
 
-                        {/* Image gallery placeholder */}
-                        {project.cover_image && (
-                            <div className="overflow-hidden rounded-2xl border border-border shadow-sm">
-                                {/* eslint-disable-next-line @next/next/no-img-element */}
-                                <img
-                                    src={project.cover_image}
-                                    alt={project.title}
-                                    className="w-full object-cover"
-                                />
-                            </div>
+                        {/* Media Slider */}
+                        {project.media && project.media.length > 0 && (
+                            <MediaGallery media={project.media} />
                         )}
                     </div>
 

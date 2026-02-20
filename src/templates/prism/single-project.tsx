@@ -8,6 +8,7 @@ import {
     IconCalendar,
     IconArrowRight,
 } from "@tabler/icons-react";
+import { MediaGallery } from "@/components/ui/media-gallery";
 
 /**
  * Prism Template — Single Project Page
@@ -246,17 +247,10 @@ export default function PrismSingleProject({ data }: PageProps) {
                 </div>
             </div>
 
-            {/* ── Project image ─────────────────────────────────────────── */}
-            {project.image_url && (
-                <div className="mx-auto max-w-4xl px-6 pb-12">
-                    <div className="overflow-hidden rounded-2xl border border-border/40">
-                        <img
-                            src={project.image_url}
-                            alt={project.title}
-                            className="w-full object-cover"
-                            style={{ maxHeight: "520px" }}
-                        />
-                    </div>
+            {/* ── Project images/videos ─────────────────────────────────────────── */}
+            {project.media && project.media.length > 0 && (
+                <div className="mx-auto max-w-5xl px-6 pb-12">
+                    <MediaGallery media={project.media} />
                 </div>
             )}
 
