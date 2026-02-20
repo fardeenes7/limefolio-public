@@ -12,19 +12,21 @@ import {
     IconRocket,
 } from "@tabler/icons-react";
 
-/**
- * Default Theme - Home Page Component
- * Modern, card-based design with gradient accents
- */
-
 // Social icon mapping
-const socialIcons: Record<string, any> = {
+const socialIconsMap: Record<string, any> = {
     github: IconBrandGithub,
     linkedin: IconBrandLinkedin,
     twitter: IconBrandTwitter,
     medium: IconBrandMedium,
     stackoverflow: IconBrandStackoverflow,
 };
+
+/**
+ * Default Theme - Home Page Component
+ * Modern, card-based design with gradient accents
+ */
+
+const socialIcons = socialIconsMap;
 
 export default function DefaultHome({ data }: PageProps) {
     let featuredProjects: any[] = [];
@@ -305,18 +307,6 @@ export default function DefaultHome({ data }: PageProps) {
                     </div>
                 </div>
             </section>
-
-            {/* Footer */}
-            <footer className="py-8 border-t border-border bg-muted/20">
-                <div className="container mx-auto px-6">
-                    <div className="text-center text-sm text-muted-foreground">
-                        <p>
-                            © {new Date().getFullYear()}{" "}
-                            {data?.title || "Portfolio"}. All rights reserved.
-                        </p>
-                    </div>
-                </div>
-            </footer>
         </div>
     );
 }

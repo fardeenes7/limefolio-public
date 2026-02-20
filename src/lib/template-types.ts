@@ -5,13 +5,22 @@
  * Each theme must provide components for all required pages.
  */
 
-import { ComponentType } from "react";
+import { ComponentType, ReactNode } from "react";
 
 /**
  * Props that will be passed to all page components
  */
 export interface PageProps {
     data: any; // Site data from API
+}
+
+/**
+ * Props passed to the layout wrapper component.
+ * `data` is the full site object from the API.
+ */
+export interface LayoutProps {
+    children: ReactNode;
+    data: any;
 }
 
 /**
@@ -34,6 +43,8 @@ export interface ThemeTemplate {
     slug: string;
     description?: string;
     tags?: string[];
+    /** Wraps every page in the template (navbar, footer, etc.) */
+    layout: ComponentType<LayoutProps>;
     home: ComponentType<PageProps>;
     "single-project": ComponentType<PageProps>;
     // Add more page types as needed:

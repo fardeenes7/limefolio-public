@@ -343,14 +343,6 @@ export default function MinimalHome({ data }: PageProps) {
                         </div>
                     </section>
                 )}
-
-                {/* Footer */}
-                <footer className="pt-12 border-t border-border">
-                    <p className="text-sm text-muted-foreground">
-                        © {new Date().getFullYear()}{" "}
-                        {data?.title || "Portfolio"}. All rights reserved.
-                    </p>
-                </footer>
             </div>
         </div>
     );

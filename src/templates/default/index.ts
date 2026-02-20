@@ -5,6 +5,7 @@
  */
 
 import { ThemeTemplate } from "@/lib/template-types";
+import DefaultLayout from "./layout";
 import DefaultHome from "./home";
 import DefaultSingleProject from "./single-project";
 
@@ -14,6 +15,7 @@ export const defaultTemplate: ThemeTemplate = {
     description:
         "A modern card-based layout with gradient accents and a bold hero.",
     tags: ["Card-based", "Gradient", "Full-sections"],
+    layout: DefaultLayout,
     home: DefaultHome,
     "single-project": DefaultSingleProject,
 };

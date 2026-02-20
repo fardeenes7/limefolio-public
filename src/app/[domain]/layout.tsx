@@ -3,12 +3,12 @@ import { notFound } from "next/navigation";
 import { Metadata } from "next";
 import { ThemeProvider } from "next-themes";
 import { themes } from "@/lib/themes";
-// TemplateProvider removed — template resolution is now done server-side per page.
 import { getFont, getAllFontVariables } from "@/lib/fonts";
 import {
     getColorTheme,
     themeVariablesToCSSProperties,
 } from "@/lib/color-themes";
+import { getTemplate } from "@/templates";
 
 export const metadata: Metadata = {
     title: "Create Next App",
@@ -28,11 +28,11 @@ export default async function DomainLayout({
 
     // Get configuration from API or use defaults
     const colorThemeSlug = siteData?.theme || "default";
-    const template = siteData?.template || "default";
+    const templateSlug = siteData?.template || "default";
     const fontSlug = siteData?.font || "outfit";
 
     console.log("Using color theme:", colorThemeSlug);
-    console.log("Using template:", template);
+    console.log("Using template:", templateSlug);
     console.log("Using font:", fontSlug);
 
     if (!siteData || siteData.error) {
@@ -46,6 +46,10 @@ export default async function DomainLayout({
     // Get the selected color theme and convert to CSS properties
     const colorTheme = getColorTheme(colorThemeSlug);
     const themeStyles = themeVariablesToCSSProperties(colorTheme.variables);
+
+    // Resolve the template's layout wrapper
+    const template = getTemplate(templateSlug);
+    const TemplateLayout = template.layout;
 
     return (
         <html
@@ -66,7 +70,7 @@ export default async function DomainLayout({
                     disableTransitionOnChange
                     themes={themes?.map((theme) => theme.value)}
                 >
-                    {children}
+                    <TemplateLayout data={siteData}>{children}</TemplateLayout>
                 </ThemeProvider>
             </body>
         </html>
