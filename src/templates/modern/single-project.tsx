@@ -4,6 +4,7 @@ import {
     IconArrowLeft,
     IconExternalLink,
     IconBrandGithub,
+    IconBrandYoutube,
     IconCalendar,
     IconSparkles,
 } from "@tabler/icons-react";
@@ -50,7 +51,8 @@ export default function ModernSingleProject({ data }: PageProps) {
     }
 
     const technologies: string[] = project.technologies || [];
-    const hasLinks = project.project_url || project.github_url;
+    const hasLinks =
+        project.project_url || project.github_url || project.youtube_url;
 
     return (
         <div className="min-h-screen bg-background text-foreground antialiased">
@@ -125,6 +127,17 @@ export default function ModernSingleProject({ data }: PageProps) {
                                 >
                                     <IconBrandGithub size={16} />
                                     Source
+                                </a>
+                            )}
+                            {project.youtube_url && (
+                                <a
+                                    href={project.youtube_url}
+                                    target="_blank"
+                                    rel="noopener noreferrer"
+                                    className="inline-flex items-center gap-2 rounded-full border border-red-500/40 bg-red-500/10 px-5 py-2 text-sm font-semibold text-red-50 backdrop-blur transition-all hover:bg-red-500/20"
+                                >
+                                    <IconBrandYoutube size={16} />
+                                    YouTube
                                 </a>
                             )}
                         </div>
@@ -257,6 +270,20 @@ export default function ModernSingleProject({ data }: PageProps) {
                                             className="text-primary"
                                         />
                                         View Source
+                                    </a>
+                                )}
+                                {project.youtube_url && (
+                                    <a
+                                        href={project.youtube_url}
+                                        target="_blank"
+                                        rel="noopener noreferrer"
+                                        className="flex items-center gap-3 rounded-xl border border-border bg-muted/40 p-3 text-sm font-medium text-foreground transition-all hover:border-red-500/40 hover:bg-red-500/5 hover:text-red-500"
+                                    >
+                                        <IconBrandYoutube
+                                            size={16}
+                                            className="text-red-500"
+                                        />
+                                        Watch Video
                                     </a>
                                 )}
                             </div>

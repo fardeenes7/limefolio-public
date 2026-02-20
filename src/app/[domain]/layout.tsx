@@ -3,8 +3,6 @@ import { notFound } from "next/navigation";
 import { Metadata } from "next";
 import { ThemeProvider } from "next-themes";
 import { getFont, getAllFontVariables } from "@/lib/fonts";
-import { getColorTheme } from "@/themes/index";
-import { getTemplate } from "@/templates";
 import { readFile } from "fs/promises";
 import path from "path";
 import { DynamicLayout } from "@/components/dynamic-layout";

@@ -6,6 +6,7 @@ import {
     IconBrandTwitter,
     IconBrandMedium,
     IconBrandStackoverflow,
+    IconBrandYoutube,
     IconExternalLink,
     IconCalendar,
     IconMapPin,
@@ -162,6 +163,19 @@ export default function MinimalHome({ data }: PageProps) {
                                                         size={16}
                                                     />{" "}
                                                     Source
+                                                </a>
+                                            )}
+                                            {project.youtube_url && (
+                                                <a
+                                                    href={project.youtube_url}
+                                                    target="_blank"
+                                                    rel="noopener noreferrer"
+                                                    className="text-muted-foreground hover:text-red-500 transition-colors flex items-center gap-1"
+                                                >
+                                                    <IconBrandYoutube
+                                                        size={16}
+                                                    />{" "}
+                                                    Video
                                                 </a>
                                             )}
                                         </div>

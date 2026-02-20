@@ -4,6 +4,7 @@ import {
     IconArrowLeft,
     IconExternalLink,
     IconBrandGithub,
+    IconBrandYoutube,
     IconCalendar,
     IconArrowRight,
 } from "@tabler/icons-react";
@@ -110,7 +111,9 @@ export default function PrismSingleProject({ data }: PageProps) {
     }
 
     const technologies: string[] = project.technologies || [];
-    const hasLinks = project.project_url || project.github_url;
+    // Check if there are ANY links to display
+    const hasLinks =
+        project.project_url || project.github_url || project.youtube_url;
 
     return (
         <div className="min-h-screen bg-background text-foreground antialiased">
@@ -225,6 +228,17 @@ export default function PrismSingleProject({ data }: PageProps) {
                                 >
                                     <IconBrandGithub size={16} />
                                     GitHub
+                                </a>
+                            )}
+                            {project.youtube_url && (
+                                <a
+                                    href={project.youtube_url}
+                                    target="_blank"
+                                    rel="noopener noreferrer"
+                                    className="inline-flex items-center gap-2 rounded-full px-6 py-3 text-sm font-semibold text-muted-foreground transition-all hover:text-red-500 hover:border-red-500/50 bg-foreground/5 border border-border/40"
+                                >
+                                    <IconBrandYoutube size={16} />
+                                    YouTube
                                 </a>
                             )}
                         </div>

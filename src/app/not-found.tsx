@@ -6,7 +6,7 @@ const figtree = Figtree({ subsets: ["latin"] });
 export default function NotFound() {
     return (
         <html lang="en" className={`${figtree.className}`}>
-            <body>
+            <body className="font-figtree">
                 <NotFoundComponent />
             </body>
         </html>

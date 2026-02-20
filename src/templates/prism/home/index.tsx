@@ -94,17 +94,19 @@ function HeroSection({ data, socialLinks }: { data: any; socialLinks: any[] }) {
 
             <div className="mx-auto w-full max-w-6xl px-6 py-20">
                 {/* Status badge */}
-                <div
-                    className="mb-8 inline-flex items-center gap-2 rounded-full px-4 py-1.5 text-sm font-medium"
-                    style={{
-                        background: "rgba(99,102,241,0.12)",
-                        border: "1px solid rgba(99,102,241,0.3)",
-                        color: "#818cf8",
-                    }}
-                >
-                    <span className="h-1.5 w-1.5 animate-pulse rounded-full bg-[#818cf8]" />
-                    Available for new opportunities
-                </div>
+                {data?.available_for_hire && (
+                    <div
+                        className="mb-8 inline-flex items-center gap-2 rounded-full px-4 py-1.5 text-sm font-medium"
+                        style={{
+                            background: "rgba(99,102,241,0.12)",
+                            border: "1px solid rgba(99,102,241,0.3)",
+                            color: "#818cf8",
+                        }}
+                    >
+                        <span className="h-1.5 w-1.5 animate-pulse rounded-full bg-[#818cf8]" />
+                        Available for new opportunities
+                    </div>
+                )}
 
                 {/* Headline */}
                 <h1 className="mb-6 text-5xl font-extrabold leading-[1.05] tracking-tight text-foreground sm:text-7xl lg:text-8xl">

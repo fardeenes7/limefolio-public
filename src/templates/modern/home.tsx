@@ -61,10 +61,12 @@ function HeroSection({ data, socialLinks }: { data: any; socialLinks: any[] }) {
 
             <div className="container mx-auto max-w-5xl px-6 pb-24 pt-20">
                 {/* Eyebrow badge */}
-                <div className="mb-6 inline-flex items-center gap-2 rounded-full border border-primary/30 bg-primary/10 px-4 py-1.5 text-sm font-medium text-primary">
-                    <IconSparkles size={14} />
-                    Available for opportunities
-                </div>
+                {data?.available_for_hire && (
+                    <div className="mb-6 inline-flex items-center gap-2 rounded-full border border-primary/30 bg-primary/10 px-4 py-1.5 text-sm font-medium text-primary">
+                        <IconSparkles size={14} />
+                        Available for opportunities
+                    </div>
+                )}
 
                 <h1 className="mb-6 text-5xl font-extrabold leading-[1.08] tracking-tight text-foreground sm:text-7xl lg:text-8xl">
                     {data?.title || "Your Name"}
