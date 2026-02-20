@@ -2,12 +2,8 @@ import getSite from "@/lib/api";
 import { notFound } from "next/navigation";
 import { Metadata } from "next";
 import { ThemeProvider } from "next-themes";
-import { themes } from "@/lib/themes";
 import { getFont, getAllFontVariables } from "@/lib/fonts";
-import {
-    getColorTheme,
-    themeVariablesToCSSProperties,
-} from "@/lib/color-themes";
+import { getColorTheme, getColorThemeMetadata } from "@/themes/index";
 import { getTemplate } from "@/templates";
 
 export const metadata: Metadata = {
@@ -24,16 +20,11 @@ export default async function DomainLayout({
 }>) {
     const { domain } = await params;
     const siteData = await getSite(domain);
-    console.log("Site data:", siteData);
 
-    // Get configuration from API or use defaults
+    // Get configuration from site data or use defaults
     const colorThemeSlug = siteData?.theme || "default";
     const templateSlug = siteData?.template || "default";
     const fontSlug = siteData?.font || "outfit";
-
-    console.log("Using color theme:", colorThemeSlug);
-    console.log("Using template:", templateSlug);
-    console.log("Using font:", fontSlug);
 
     if (!siteData || siteData.error) {
         return notFound();
@@ -43,20 +34,15 @@ export default async function DomainLayout({
     const selectedFont = getFont(fontSlug);
     const allFontVariables = getAllFontVariables();
 
-    // Get the selected color theme and convert to CSS properties
-    const colorTheme = getColorTheme(colorThemeSlug);
-    const themeStyles = themeVariablesToCSSProperties(colorTheme.variables);
+    // Build the list of theme class names for next-themes
+    // const allThemeSlugs = getColorThemeMetadata().map((t) => t.slug);
 
     // Resolve the template's layout wrapper
     const template = getTemplate(templateSlug);
     const TemplateLayout = template.layout;
 
     return (
-        <html
-            lang="en"
-            className={allFontVariables}
-            style={themeStyles as React.CSSProperties}
-        >
+        <html lang="en" className={`${allFontVariables} ${colorThemeSlug}`}>
             <body
                 className={`antialiased font-${fontSlug}`}
                 style={{
@@ -66,9 +52,9 @@ export default async function DomainLayout({
                 <ThemeProvider
                     attribute="class"
                     defaultTheme={colorThemeSlug}
-                    enableSystem
+                    enableSystem={false}
                     disableTransitionOnChange
-                    themes={themes?.map((theme) => theme.value)}
+                    // themes={allThemeSlugs}
                 >
                     <TemplateLayout data={siteData}>{children}</TemplateLayout>
                 </ThemeProvider>

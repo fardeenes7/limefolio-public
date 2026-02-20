@@ -1,5 +1,5 @@
 import { NextResponse } from "next/server";
-import { getColorThemeMetadata } from "@/lib/color-themes";
+import { getColorThemeMetadata } from "@/themes/index";
 
 /**
  * GET /api/color-themes
