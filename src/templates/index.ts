@@ -19,6 +19,7 @@ import { TemplateRegistry } from "@/lib/template-types";
 import { defaultTemplate } from "./default";
 import { modernTemplate } from "./modern";
 import { minimalTemplate } from "./minimal";
+import { prismTemplate } from "./prism";
 
 // Import additional themes here:
 // import { minimalTemplate } from "./minimal";
@@ -31,6 +32,7 @@ export const Templates: TemplateRegistry = {
     default: defaultTemplate,
     modern: modernTemplate,
     minimal: minimalTemplate,
+    prism: prismTemplate,
 };
 
 /**

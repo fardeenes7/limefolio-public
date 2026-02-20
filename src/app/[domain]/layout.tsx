@@ -7,6 +7,7 @@ import { getColorTheme } from "@/themes/index";
 import { getTemplate } from "@/templates";
 import { readFile } from "fs/promises";
 import path from "path";
+import { DynamicLayout } from "@/components/dynamic-layout";
 
 export const metadata: Metadata = {
     title: "Create Next App",
@@ -85,8 +86,9 @@ export default async function DomainLayout({
     const themeCSS = await loadThemeCSS(colorThemeSlug);
 
     // Resolve the template's layout wrapper
-    const template = getTemplate(templateSlug);
-    const TemplateLayout = template.layout;
+    // The wrapper is dynamic for the preview functionality
+    // const template = getTemplate(templateSlug);
+    // const TemplateLayout = template.layout;
 
     return (
         <html lang="en" className={`${allFontVariables} ${colorThemeSlug}`}>
@@ -109,7 +111,9 @@ export default async function DomainLayout({
                     enableSystem={false}
                     disableTransitionOnChange
                 >
-                    <TemplateLayout data={siteData}>{children}</TemplateLayout>
+                    <DynamicLayout data={siteData} domain={domain}>
+                        {children}
+                    </DynamicLayout>
                 </ThemeProvider>
             </body>
         </html>

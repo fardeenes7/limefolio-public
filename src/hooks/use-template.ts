@@ -16,13 +16,14 @@ import { useTemplateContext } from "@/contexts/template-context";
 import { Templates } from "@/templates";
 import { ThemeTemplate } from "@/lib/template-types";
 import { ComponentType } from "react";
-import { PageProps } from "@/lib/template-types";
+import { PageProps, LayoutProps } from "@/lib/template-types";
 
 /**
  * Template components with PascalCase names for easy destructuring
  */
 export interface TemplateComponents {
     HomeComponent: ComponentType<PageProps>;
+    LayoutComponent: ComponentType<LayoutProps>;
     SingleProjectComponent: ComponentType<PageProps>;
     // Add more as needed:
     // AboutComponent: ComponentType<PageProps>;
@@ -35,7 +36,7 @@ export interface TemplateComponents {
 function getComponentWithFallback(
     theme: string,
     componentKey: keyof ThemeTemplate,
-): ComponentType<PageProps> {
+): ComponentType<PageProps | LayoutProps> {
     const themeTemplate = Templates[theme];
     const defaultTemplate = Templates.default;
 
@@ -76,8 +77,18 @@ function buildTemplateWithFallbacks(theme: string): ThemeTemplate {
     const template: ThemeTemplate = {
         name: themeTemplate.name,
         slug: themeTemplate.slug,
-        home: getComponentWithFallback(theme, "home"),
-        "single-project": getComponentWithFallback(theme, "single-project"),
+        layout: getComponentWithFallback(
+            theme,
+            "layout",
+        ) as ComponentType<LayoutProps>,
+        home: getComponentWithFallback(
+            theme,
+            "home",
+        ) as ComponentType<PageProps>,
+        "single-project": getComponentWithFallback(
+            theme,
+            "single-project",
+        ) as ComponentType<PageProps>,
     };
 
     return template;
@@ -96,6 +107,7 @@ export function useTemplate(): TemplateComponents {
 
     return {
         HomeComponent: template.home,
+        LayoutComponent: template.layout,
         SingleProjectComponent: template["single-project"],
         // Add more mappings as you add page types
     };

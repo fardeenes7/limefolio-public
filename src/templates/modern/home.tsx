@@ -410,19 +410,19 @@ function ContactSection({ data }: { data: any }) {
         <section id="contact" className="relative overflow-hidden py-24">
             {/* Full-bleed gradient band */}
             <div className="pointer-events-none absolute inset-0 -z-10 bg-linear-to-br from-primary via-primary/80 to-accent opacity-90" />
-            <div className="pointer-events-none absolute -left-20 -top-20 h-64 w-64 rounded-full bg-white/10 blur-3xl" />
-            <div className="pointer-events-none absolute -bottom-20 -right-20 h-64 w-64 rounded-full bg-white/10 blur-3xl" />
+            <div className="pointer-events-none absolute -left-20 -top-20 h-64 w-64 rounded-full bg-foreground/10 blur-3xl" />
+            <div className="pointer-events-none absolute -bottom-20 -right-20 h-64 w-64 rounded-full bg-foreground/10 blur-3xl" />
 
             <div className="container mx-auto max-w-3xl px-6 text-center">
-                <h2 className="mb-4 text-4xl font-extrabold tracking-tight text-primary-foreground sm:text-5xl">
+                <h2 className="mb-4 text-4xl font-extrabold tracking-tight text-foreground sm:text-5xl">
                     Let&apos;s build something great
                 </h2>
-                <p className="mb-10 text-lg text-primary-foreground/80">
+                <p className="mb-10 text-lg text-foreground/80">
                     Have a project in mind? I&apos;d love to hear about it.
                     Reach out and let&apos;s talk.
                 </p>
                 <a
-                    href={`mailto:${data?.user?.email || "hello@example.com"}`}
+                    href={`mailto:${data?.user?.email}`}
                     className="inline-flex items-center gap-2 rounded-full border-2 border-primary-foreground/40 bg-primary-foreground px-8 py-3.5 font-semibold text-primary shadow-xl shadow-black/20 transition-all hover:scale-105"
                 >
                     <IconMail size={20} />
