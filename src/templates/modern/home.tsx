@@ -166,40 +166,65 @@ function ProjectsSection({ projects }: { projects: any[] }) {
                     {/* Hero card — spans 2 cols on large */}
                     <Link
                         href={`/projects/${hero.slug}`}
-                        className="group relative col-span-1 flex flex-col overflow-hidden rounded-2xl border border-border bg-card p-6 shadow-sm transition-all duration-300 hover:-translate-y-1 hover:border-primary/40 hover:shadow-xl hover:shadow-primary/10 lg:col-span-2"
+                        className="group relative col-span-1 flex flex-col overflow-hidden rounded-2xl border border-border bg-card shadow-sm transition-all duration-300 hover:-translate-y-1 hover:border-primary/40 hover:shadow-xl hover:shadow-primary/10 lg:col-span-2"
                     >
-                        <div className="mb-4 inline-flex w-fit items-center gap-1.5 rounded-full bg-primary/10 px-3 py-1 text-xs font-semibold text-primary">
-                            <IconSparkles size={12} /> Featured
-                        </div>
-                        <h3 className="mb-2 text-2xl font-bold text-foreground transition-colors group-hover:text-primary">
-                            {hero.title}
-                        </h3>
-                        {hero.tagline && (
-                            <p className="mb-4 text-muted-foreground">
-                                {hero.tagline}
-                            </p>
-                        )}
-                        {hero.technologies?.length > 0 && (
-                            <div className="mt-auto flex flex-wrap gap-2">
-                                {hero.technologies
-                                    .slice(0, 5)
-                                    .map((tech: string, i: number) => (
-                                        <span
-                                            key={i}
-                                            className="rounded-full bg-muted px-3 py-1 text-xs font-medium text-muted-foreground"
-                                        >
-                                            {tech}
-                                        </span>
-                                    ))}
+                        <div className="flex h-full flex-col md:flex-row">
+                            {/* Hero Card Image */}
+                            <div className="relative aspect-video w-full overflow-hidden bg-muted md:aspect-auto md:w-1/2">
+                                {hero.thumbnail ? (
+                                    <img
+                                        src={hero.thumbnail}
+                                        alt={hero.title}
+                                        className="h-full w-full object-cover transition-transform duration-500 group-hover:scale-110"
+                                    />
+                                ) : (
+                                    <div className="flex h-full w-full items-center justify-center bg-linear-to-br from-primary/10 to-accent/10">
+                                        <IconSparkles
+                                            className="text-primary/20"
+                                            size={48}
+                                        />
+                                    </div>
+                                )}
+                                <div className="absolute left-4 top-4 z-10">
+                                    <div className="inline-flex items-center gap-1.5 rounded-full bg-primary px-3 py-1 text-[10px] font-bold uppercase tracking-wider text-primary-foreground shadow-lg">
+                                        <IconSparkles size={12} /> Featured
+                                    </div>
+                                </div>
                             </div>
-                        )}
-                        {/* Arrow */}
-                        <IconArrowUpRight
-                            size={20}
-                            className="absolute right-5 top-5 text-muted-foreground opacity-0 transition-all group-hover:opacity-100 group-hover:text-primary"
-                        />
-                        {/* Gradient hover shimmer */}
-                        <div className="pointer-events-none absolute inset-0 bg-linear-to-br from-primary/5 to-transparent opacity-0 transition-opacity group-hover:opacity-100" />
+
+                            {/* Hero Card Content */}
+                            <div className="flex flex-1 flex-col p-8">
+                                <h3 className="mb-3 text-2xl font-bold text-foreground transition-colors group-hover:text-primary lg:text-3xl">
+                                    {hero.title}
+                                </h3>
+                                {hero.tagline && (
+                                    <p className="mb-6 text-muted-foreground line-clamp-3">
+                                        {hero.tagline}
+                                    </p>
+                                )}
+                                {hero.technologies?.length > 0 && (
+                                    <div className="mt-auto flex flex-wrap gap-2">
+                                        {hero.technologies
+                                            .slice(0, 5)
+                                            .map((tech: string, i: number) => (
+                                                <span
+                                                    key={i}
+                                                    className="rounded-full bg-muted px-3 py-1 text-[11px] font-medium text-muted-foreground"
+                                                >
+                                                    {tech}
+                                                </span>
+                                            ))}
+                                    </div>
+                                )}
+                                {/* Arrow */}
+                                <IconArrowUpRight
+                                    size={20}
+                                    className="absolute right-6 top-6 text-muted-foreground opacity-0 transition-all group-hover:opacity-100 group-hover:text-primary"
+                                />
+                                {/* Gradient hover shimmer */}
+                                <div className="pointer-events-none absolute inset-0 bg-linear-to-br from-primary/5 to-transparent opacity-0 transition-opacity group-hover:opacity-100" />
+                            </div>
+                        </div>
                     </Link>
 
                     {/* Smaller cards */}
@@ -207,35 +232,55 @@ function ProjectsSection({ projects }: { projects: any[] }) {
                         <Link
                             key={project.id}
                             href={`/projects/${project.slug}`}
-                            className="group relative flex flex-col overflow-hidden rounded-2xl border border-border bg-card p-5 shadow-sm transition-all duration-300 hover:-translate-y-1 hover:border-primary/40 hover:shadow-xl hover:shadow-primary/10"
+                            className="group relative flex flex-col overflow-hidden rounded-2xl border border-border bg-card shadow-sm transition-all duration-300 hover:-translate-y-1 hover:border-primary/40 hover:shadow-xl hover:shadow-primary/10"
                         >
-                            <h3 className="mb-2 text-lg font-semibold text-foreground transition-colors group-hover:text-primary">
-                                {project.title}
-                            </h3>
-                            {project.tagline && (
-                                <p className="mb-3 text-sm text-muted-foreground line-clamp-2">
-                                    {project.tagline}
-                                </p>
-                            )}
-                            {project.technologies?.length > 0 && (
-                                <div className="mt-auto flex flex-wrap gap-1.5">
-                                    {project.technologies
-                                        .slice(0, 3)
-                                        .map((tech: string, i: number) => (
-                                            <span
-                                                key={i}
-                                                className="rounded-full bg-muted px-2.5 py-0.5 text-[11px] text-muted-foreground"
-                                            >
-                                                {tech}
-                                            </span>
-                                        ))}
-                                </div>
-                            )}
-                            <IconArrowUpRight
-                                size={18}
-                                className="absolute right-4 top-4 text-muted-foreground opacity-0 transition-all group-hover:opacity-100 group-hover:text-primary"
-                            />
-                            <div className="pointer-events-none absolute inset-0 bg-linear-to-br from-primary/5 to-transparent opacity-0 transition-opacity group-hover:opacity-100" />
+                            {/* Small Card Image */}
+                            <div className="relative aspect-video w-full overflow-hidden bg-muted">
+                                {project.thumbnail ? (
+                                    <img
+                                        src={project.thumbnail}
+                                        alt={project.title}
+                                        className="h-full w-full object-cover transition-transform duration-500 group-hover:scale-110"
+                                    />
+                                ) : (
+                                    <div className="flex h-full w-full items-center justify-center bg-linear-to-br from-primary/5 to-accent/5">
+                                        <IconSparkles
+                                            className="text-primary/10"
+                                            size={32}
+                                        />
+                                    </div>
+                                )}
+                            </div>
+
+                            <div className="flex flex-1 flex-col p-5">
+                                <h3 className="mb-2 text-lg font-semibold text-foreground transition-colors group-hover:text-primary">
+                                    {project.title}
+                                </h3>
+                                {project.tagline && (
+                                    <p className="mb-3 text-sm text-muted-foreground line-clamp-2">
+                                        {project.tagline}
+                                    </p>
+                                )}
+                                {project.technologies?.length > 0 && (
+                                    <div className="mt-auto flex flex-wrap gap-1.5 pt-2">
+                                        {project.technologies
+                                            .slice(0, 3)
+                                            .map((tech: string, i: number) => (
+                                                <span
+                                                    key={i}
+                                                    className="rounded-full bg-muted px-2.5 py-0.5 text-[10px] text-muted-foreground"
+                                                >
+                                                    {tech}
+                                                </span>
+                                            ))}
+                                    </div>
+                                )}
+                                <IconArrowUpRight
+                                    size={18}
+                                    className="absolute right-4 top-4 text-muted-foreground opacity-0 transition-all group-hover:opacity-100 group-hover:text-primary"
+                                />
+                                <div className="pointer-events-none absolute inset-0 bg-linear-to-br from-primary/5 to-transparent opacity-0 transition-opacity group-hover:opacity-100" />
+                            </div>
                         </Link>
                     ))}
                 </div>

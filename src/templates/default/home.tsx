@@ -159,22 +159,44 @@ export default function DefaultHome({ data }: PageProps) {
                                     <Link
                                         key={project.id}
                                         href={`/projects/${project.slug}`}
-                                        className="group relative overflow-hidden rounded-xl border border-border bg-card hover:shadow-xl transition-all duration-300 hover:-translate-y-1"
+                                        className="group relative flex flex-col overflow-hidden rounded-xl border border-border bg-card shadow-sm hover:shadow-xl transition-all duration-300 hover:-translate-y-1"
                                     >
-                                        <div className="p-6">
-                                            <div className="flex items-start justify-between mb-4">
-                                                <div className="p-3 rounded-lg bg-primary/10 text-primary">
-                                                    <IconRocket size={24} />
+                                        {/* Project Thumbnail */}
+                                        <div className="relative aspect-video w-full overflow-hidden bg-muted">
+                                            {project.thumbnail ? (
+                                                <img
+                                                    src={project.thumbnail}
+                                                    alt={project.title}
+                                                    className="h-full w-full object-cover transition-transform duration-500 group-hover:scale-110"
+                                                />
+                                            ) : (
+                                                <div className="flex h-full w-full items-center justify-center bg-primary/5">
+                                                    <IconRocket
+                                                        className="text-primary/20"
+                                                        size={48}
+                                                    />
                                                 </div>
+                                            )}
+                                            {/* Featured tag */}
+                                            {project.featured && (
+                                                <div className="absolute top-3 left-3 z-10">
+                                                    <span className="px-2 py-0.5 rounded text-[10px] font-bold bg-primary text-primary-foreground shadow-lg">
+                                                        FEATURED
+                                                    </span>
+                                                </div>
+                                            )}
+                                        </div>
+
+                                        <div className="p-6 flex flex-1 flex-col">
+                                            <div className="flex items-center justify-between mb-4">
+                                                <h3 className="text-xl font-bold text-foreground group-hover:text-primary transition-colors">
+                                                    {project.title}
+                                                </h3>
                                                 <IconArrowRight
                                                     size={20}
                                                     className="text-muted-foreground group-hover:text-primary group-hover:translate-x-1 transition-all"
                                                 />
                                             </div>
-
-                                            <h3 className="text-xl font-bold text-foreground mb-2 group-hover:text-primary transition-colors">
-                                                {project.title}
-                                            </h3>
 
                                             {project.tagline && (
                                                 <p className="text-sm text-muted-foreground mb-4">

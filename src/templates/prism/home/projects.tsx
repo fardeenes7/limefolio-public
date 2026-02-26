@@ -99,56 +99,77 @@ export default function ProjectsSection({ projects }: { projects: any[] }) {
                     {/* Hero card */}
                     <Link
                         href={`/projects/${hero.slug}`}
-                        className="group relative col-span-1 flex flex-col overflow-hidden rounded-2xl p-6 transition-all duration-300 hover:-translate-y-1 lg:col-span-2 bg-foreground/5 border-border/40 border hover:border-primary/40"
-                        style={{
-                            boxShadow: `0 0 0 0 ${CARD_GLOWS[0]}`,
-                        }}
+                        className="group relative col-span-1 flex flex-col overflow-hidden rounded-2xl transition-all duration-300 hover:-translate-y-1 lg:col-span-2 bg-foreground/5 border-border/40 border hover:border-primary/40"
                     >
-                        {/* Gradient shimmer overlay */}
-                        <div
-                            className="pointer-events-none absolute inset-0 opacity-0 transition-opacity duration-500 group-hover:opacity-100 rounded-2xl"
-                            style={{
-                                background:
-                                    "linear-gradient(135deg, rgba(99,102,241,0.06) 0%, rgba(168,85,247,0.04) 100%)",
-                            }}
-                        />
-
-                        <div
-                            className="mb-4 inline-flex w-fit items-center gap-1.5 rounded-full px-3 py-1 text-xs font-semibold"
-                            style={{
-                                background: "rgba(99,102,241,0.15)",
-                                border: "1px solid rgba(99,102,241,0.3)",
-                                color: "#818cf8",
-                            }}
-                        >
-                            <IconStar size={11} /> Featured
-                        </div>
-
-                        <h3 className="mb-3 text-2xl font-bold text-foreground transition-colors">
-                            {hero.title}
-                        </h3>
-                        {hero.tagline && (
-                            <p className="mb-5 text-muted-foreground leading-relaxed">
-                                {hero.tagline}
-                            </p>
-                        )}
-                        {hero.technologies?.length > 0 && (
-                            <div className="mt-auto flex flex-wrap gap-2">
-                                {hero.technologies
-                                    .slice(0, 5)
-                                    .map((tech: string, i: number) => (
-                                        <TechPill
-                                            key={i}
-                                            label={tech}
-                                            index={i}
+                        <div className="flex h-full flex-col md:flex-row">
+                            {/* Project Thumbnail */}
+                            <div className="relative aspect-video w-full overflow-hidden bg-muted md:aspect-auto md:w-2/5">
+                                {hero.thumbnail ? (
+                                    <img
+                                        src={hero.thumbnail}
+                                        alt={hero.title}
+                                        className="h-full w-full object-cover transition-transform duration-700 group-hover:scale-110"
+                                    />
+                                ) : (
+                                    <div className="flex h-full w-full items-center justify-center bg-foreground/5">
+                                        <IconStar
+                                            className="text-foreground/10"
+                                            size={48}
                                         />
-                                    ))}
+                                    </div>
+                                )}
+                                <div className="absolute left-4 top-4 z-10">
+                                    <div
+                                        className="inline-flex items-center gap-1.5 rounded-full px-3 py-1 text-[10px] font-bold uppercase tracking-wider shadow-lg"
+                                        style={{
+                                            background: "rgba(99,102,241,0.25)",
+                                            backdropFilter: "blur(8px)",
+                                            border: "1px solid rgba(99,102,241,0.4)",
+                                            color: "#a5b4fc",
+                                        }}
+                                    >
+                                        <IconStar size={11} /> Featured
+                                    </div>
+                                </div>
                             </div>
-                        )}
-                        <IconArrowUpRight
-                            size={20}
-                            className="absolute right-5 top-5 text-muted-foreground opacity-0 transition-all group-hover:opacity-100 group-hover:text-primary"
-                        />
+
+                            <div className="flex flex-1 flex-col p-8">
+                                {/* Gradient shimmer overlay */}
+                                <div
+                                    className="pointer-events-none absolute inset-0 opacity-0 transition-opacity duration-500 group-hover:opacity-100 rounded-2xl"
+                                    style={{
+                                        background:
+                                            "linear-gradient(135deg, rgba(99,102,241,0.06) 0%, rgba(168,85,247,0.04) 100%)",
+                                    }}
+                                />
+
+                                <h3 className="mb-3 text-2xl font-bold text-foreground transition-colors lg:text-3xl">
+                                    {hero.title}
+                                </h3>
+                                {hero.tagline && (
+                                    <p className="mb-6 text-muted-foreground leading-relaxed line-clamp-3">
+                                        {hero.tagline}
+                                    </p>
+                                )}
+                                {hero.technologies?.length > 0 && (
+                                    <div className="mt-auto flex flex-wrap gap-2">
+                                        {hero.technologies
+                                            .slice(0, 5)
+                                            .map((tech: string, i: number) => (
+                                                <TechPill
+                                                    key={i}
+                                                    label={tech}
+                                                    index={i}
+                                                />
+                                            ))}
+                                    </div>
+                                )}
+                                <IconArrowUpRight
+                                    size={22}
+                                    className="absolute right-6 top-6 text-muted-foreground opacity-0 transition-all group-hover:opacity-100 group-hover:text-primary"
+                                />
+                            </div>
+                        </div>
                     </Link>
 
                     {/* Smaller cards */}
@@ -156,33 +177,53 @@ export default function ProjectsSection({ projects }: { projects: any[] }) {
                         <Link
                             key={project.id}
                             href={`/projects/${project.slug}`}
-                            className="group relative flex flex-col overflow-hidden rounded-2xl p-5 transition-all duration-300 hover:-translate-y-1 bg-foreground/5 border-border/40 border hover:border-primary/40"
+                            className="group relative flex flex-col overflow-hidden rounded-2xl transition-all duration-300 hover:-translate-y-1 bg-foreground/5 border-border/40 border hover:border-primary/40"
                         >
-                            <h3 className="mb-2 text-lg font-semibold text-foreground">
-                                {project.title}
-                            </h3>
-                            {project.tagline && (
-                                <p className="mb-4 text-sm text-muted-foreground line-clamp-2">
-                                    {project.tagline}
-                                </p>
-                            )}
-                            {project.technologies?.length > 0 && (
-                                <div className="mt-auto flex flex-wrap gap-1.5">
-                                    {project.technologies
-                                        .slice(0, 3)
-                                        .map((tech: string, i: number) => (
-                                            <TechPill
-                                                key={i}
-                                                label={tech}
-                                                index={i + idx + 1}
-                                            />
-                                        ))}
-                                </div>
-                            )}
-                            <IconArrowUpRight
-                                size={18}
-                                className="absolute right-4 top-4 text-muted-foreground opacity-0 transition-all group-hover:opacity-100 group-hover:text-primary"
-                            />
+                            {/* Project Thumbnail */}
+                            <div className="relative aspect-video w-full overflow-hidden bg-muted">
+                                {project.thumbnail ? (
+                                    <img
+                                        src={project.thumbnail}
+                                        alt={project.title}
+                                        className="h-full w-full object-cover transition-transform duration-700 group-hover:scale-110"
+                                    />
+                                ) : (
+                                    <div className="flex h-full w-full items-center justify-center bg-foreground/5">
+                                        <IconStar
+                                            className="text-foreground/5"
+                                            size={32}
+                                        />
+                                    </div>
+                                )}
+                            </div>
+
+                            <div className="flex flex-1 flex-col p-5">
+                                <h3 className="mb-2 text-lg font-semibold text-foreground">
+                                    {project.title}
+                                </h3>
+                                {project.tagline && (
+                                    <p className="mb-4 text-sm text-muted-foreground line-clamp-2 leading-relaxed">
+                                        {project.tagline}
+                                    </p>
+                                )}
+                                {project.technologies?.length > 0 && (
+                                    <div className="mt-auto flex flex-wrap gap-1.5">
+                                        {project.technologies
+                                            .slice(0, 3)
+                                            .map((tech: string, i: number) => (
+                                                <TechPill
+                                                    key={i}
+                                                    label={tech}
+                                                    index={i + idx + 1}
+                                                />
+                                            ))}
+                                    </div>
+                                )}
+                                <IconArrowUpRight
+                                    size={18}
+                                    className="absolute right-4 top-4 text-muted-foreground opacity-0 transition-all group-hover:opacity-100 group-hover:text-primary"
+                                />
+                            </div>
                         </Link>
                     ))}
                 </div>

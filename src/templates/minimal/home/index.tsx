@@ -104,13 +104,31 @@ export default function MinimalHome({ data }: PageProps) {
                         <h2 className="text-sm uppercase tracking-wider text-muted-foreground mb-8 font-medium">
                             Featured Projects
                         </h2>
-                        <div className="space-y-12">
+                        <div className="space-y-16">
                             {featuredProjects.map((project: any) => (
                                 <article key={project.id} className="group">
                                     <Link
                                         href={`/projects/${project.slug}`}
                                         className="block"
                                     >
+                                        {/* Project Thumbnail */}
+                                        <div className="relative aspect-video w-full overflow-hidden rounded-lg bg-muted mb-6">
+                                            {project.thumbnail ? (
+                                                <img
+                                                    src={project.thumbnail}
+                                                    alt={project.title}
+                                                    className="h-full w-full object-cover grayscale transition-all duration-500 group-hover:grayscale-0 group-hover:scale-105"
+                                                />
+                                            ) : (
+                                                <div className="flex h-full w-full items-center justify-center bg-muted/50">
+                                                    <IconBriefcase
+                                                        className="text-muted-foreground/20"
+                                                        size={40}
+                                                    />
+                                                </div>
+                                            )}
+                                        </div>
+
                                         <h3 className="text-2xl font-semibold text-foreground mb-2 group-hover:text-muted-foreground transition-colors">
                                             {project.title}
                                         </h3>
@@ -155,9 +173,6 @@ export default function MinimalHome({ data }: PageProps) {
                                                     target="_blank"
                                                     rel="noopener noreferrer"
                                                     className="text-muted-foreground hover:text-foreground transition-colors flex items-center gap-1"
-                                                    // onClick={(e) =>
-                                                    //     e.stopPropagation()
-                                                    // }
                                                 >
                                                     <IconBrandGithub
                                                         size={16}
@@ -199,45 +214,59 @@ export default function MinimalHome({ data }: PageProps) {
                                     <Link
                                         key={project.id}
                                         href={`/projects/${project.slug}`}
-                                        className="group block p-6 border border-border rounded-lg hover:border-foreground/20 transition-colors"
+                                        className="group block overflow-hidden border border-border rounded-lg hover:border-foreground/20 transition-all"
                                     >
-                                        <h3 className="text-lg font-semibold text-foreground mb-2 group-hover:text-muted-foreground transition-colors">
-                                            {project.title}
-                                        </h3>
-                                        {project.tagline && (
-                                            <p className="text-sm text-muted-foreground mb-3">
-                                                {project.tagline}
-                                            </p>
-                                        )}
-                                        {project.technologies &&
-                                            project.technologies.length > 0 && (
-                                                <div className="flex flex-wrap gap-2">
-                                                    {project.technologies
-                                                        .slice(0, 3)
-                                                        .map(
-                                                            (
-                                                                tech: string,
-                                                                idx: number,
-                                                            ) => (
-                                                                <span
-                                                                    key={idx}
-                                                                    className="text-xs px-2 py-1 bg-muted/50 text-muted-foreground rounded"
-                                                                >
-                                                                    {tech}
-                                                                </span>
-                                                            ),
-                                                        )}
-                                                    {project.technologies
-                                                        .length > 3 && (
-                                                        <span className="text-xs px-2 py-1 text-muted-foreground">
-                                                            +
-                                                            {project
-                                                                .technologies
-                                                                .length - 3}
-                                                        </span>
-                                                    )}
+                                        {/* Small Thumbnail */}
+                                        <div className="relative aspect-video w-full overflow-hidden bg-muted">
+                                            {project.thumbnail ? (
+                                                <img
+                                                    src={project.thumbnail}
+                                                    alt={project.title}
+                                                    className="h-full w-full object-cover grayscale transition-all duration-500 group-hover:grayscale-0 group-hover:scale-105"
+                                                />
+                                            ) : (
+                                                <div className="flex h-full w-full items-center justify-center bg-muted/30">
+                                                    <IconBriefcase
+                                                        className="text-muted-foreground/10"
+                                                        size={24}
+                                                    />
                                                 </div>
                                             )}
+                                        </div>
+
+                                        <div className="p-6">
+                                            <h3 className="text-lg font-semibold text-foreground mb-2 group-hover:text-muted-foreground transition-colors">
+                                                {project.title}
+                                            </h3>
+                                            {project.tagline && (
+                                                <p className="text-sm text-muted-foreground mb-3 line-clamp-2">
+                                                    {project.tagline}
+                                                </p>
+                                            )}
+                                            {project.technologies &&
+                                                project.technologies.length >
+                                                    0 && (
+                                                    <div className="flex flex-wrap gap-2">
+                                                        {project.technologies
+                                                            .slice(0, 3)
+                                                            .map(
+                                                                (
+                                                                    tech: string,
+                                                                    idx: number,
+                                                                ) => (
+                                                                    <span
+                                                                        key={
+                                                                            idx
+                                                                        }
+                                                                        className="text-[10px] px-2 py-0.5 bg-muted/50 text-muted-foreground rounded"
+                                                                    >
+                                                                        {tech}
+                                                                    </span>
+                                                                ),
+                                                            )}
+                                                    </div>
+                                                )}
+                                        </div>
                                     </Link>
                                 ))}
                         </div>
