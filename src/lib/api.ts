@@ -2,6 +2,8 @@
 
 import { SAMPLE_DATA } from "@/lib/sample-data";
 
+const REVALIDATE_TIME = 86400;
+
 async function fetcher(pathname: string, options: RequestInit = {}) {
     const apiUrl = process.env.API_URL?.replace(/\/$/, "");
     const reqUrl = `${apiUrl}/${pathname.replace(/^\//, "")}`;
@@ -29,7 +31,7 @@ export default async function getSite(domain: string) {
     const res = await fetcher("/", {
         headers: domainHeaders(domain),
         next: {
-            revalidate: 3600,
+            revalidate: REVALIDATE_TIME,
             tags: [`${domain}-site`],
         },
     });
@@ -44,7 +46,7 @@ export async function getProjects(domain: string) {
     const res = await fetcher("/projects/", {
         headers: domainHeaders(domain),
         next: {
-            revalidate: 3600,
+            revalidate: REVALIDATE_TIME,
             tags: [`${domain}-projects`],
         },
     });
@@ -62,7 +64,7 @@ export async function getProject(domain: string, slug: string) {
     const res = await fetcher(`/projects/${slug}/`, {
         headers: domainHeaders(domain),
         next: {
-            revalidate: 3600,
+            revalidate: REVALIDATE_TIME,
             tags: [`${domain}-project-${slug}`],
         },
     });
