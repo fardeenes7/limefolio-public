@@ -29,7 +29,7 @@ export default async function getSite(domain: string) {
     const res = await fetcher("/", {
         headers: domainHeaders(domain),
         next: {
-            // revalidate: 3600,
+            revalidate: 3600,
             tags: [`${domain}-site`],
         },
     });
@@ -43,7 +43,10 @@ export async function getProjects(domain: string) {
 
     const res = await fetcher("/projects/", {
         headers: domainHeaders(domain),
-        next: { tags: [`${domain}-projects`] },
+        next: {
+            revalidate: 3600,
+            tags: [`${domain}-projects`],
+        },
     });
     return Array.isArray(res) ? res : (res?.results ?? []);
 }
@@ -58,7 +61,10 @@ export async function getProject(domain: string, slug: string) {
 
     const res = await fetcher(`/projects/${slug}/`, {
         headers: domainHeaders(domain),
-        next: { tags: [`${domain}-project-${slug}`] },
+        next: {
+            revalidate: 3600,
+            tags: [`${domain}-project-${slug}`],
+        },
     });
     return res;
 }
